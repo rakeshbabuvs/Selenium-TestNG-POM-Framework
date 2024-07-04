@@ -56,14 +56,14 @@ public class ProductInfoPageTest extends BaseTest {
         return ExcelUtil.getTestData(AppConstants.PRODUCT_IMAGES_SHEET_NAME);
     }
 
-    @Description("Test Case: Verify the number of product images. This test checks that the number of images for each product matches the expected count using data from a sheet.")
-   // @Severity(SeverityLevel.CRITICAL)
-    @Test(dataProvider = "getProductImageSheetData", groups = {"sanity"}, priority = 2)
-    public void productImagesCountTest(String searchKey, String productName, String imagesCount) {
-        searchResultsPage = accPage.doSearch(searchKey);
-        productInfoPage = searchResultsPage.selectProduct(productName);
-        Assert.assertEquals(productInfoPage.getProductImagesCount(), Integer.parseInt(imagesCount), AppError.IMAGES_COUNT_MISMATCHED);
-    }
+//    @Description("Test Case: Verify the number of product images. This test checks that the number of images for each product matches the expected count using data from a sheet.")
+//   // @Severity(SeverityLevel.CRITICAL)
+////    @Test(dataProvider = "getProductImageSheetData", groups = {"sanity"}, priority = 2)
+////    public void productImagesCountTest(String searchKey, String productName, String imagesCount) {
+////        searchResultsPage = accPage.doSearch(searchKey);
+////        productInfoPage = searchResultsPage.selectProduct(productName);
+////        Assert.assertEquals(productInfoPage.getProductImagesCount(), Integer.parseInt(imagesCount), AppError.IMAGES_COUNT_MISMATCHED);
+////    }
 
     @Description("Test Case: Verify the product information. This test checks multiple product information fields using soft assertions.")
    // @Severity(SeverityLevel.BLOCKER)

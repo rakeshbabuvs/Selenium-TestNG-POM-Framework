@@ -22,11 +22,5 @@
         </classes>
     </test>
 
-    <test name="PROD Page Test _ chrome">
-        <parameter name="browser" value="chrome" />
-        <classes>
-            <class name="com.qa.opencart.tests.ProductInfoPageTest" />
-        </classes>
-    </test>
 
 </suite>

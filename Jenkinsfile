@@ -6,7 +6,7 @@ pipeline {
     }
 
     tools {
-        maven 'maven'
+        maven 'maven' // Ensure 'maven' is the name of the Maven tool configured in Jenkins
     }
 
     stages {
@@ -25,13 +25,13 @@ pipeline {
 
         stage("Deploy to Dev") {
             steps {
-                echo("deploy to Dev")
+                echo("Deploy to Dev")
             }
         }
 
         stage("Deploy to QA") {
             steps {
-                echo("deploy to qa")
+                echo("Deploy to QA")
             }
         }
 
@@ -52,7 +52,7 @@ pipeline {
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
-                        results: [[path: '/allure-results']]
+                        results: [[path: 'target/allure-results']] // Ensure this path is correct
                     ])
                 }
             }
@@ -63,7 +63,7 @@ pipeline {
                 publishHTML([allowMissing: false,
                              alwaysLinkToLastBuild: false,
                              keepAll: true,
-                             reportDir: 'reports',
+                             reportDir: 'target/reports', // Ensure this path is correct
                              reportFiles: 'TestExecutionReport.html',
                              reportName: 'HTML Regression Extent Report',
                              reportTitles: ''])
@@ -72,7 +72,7 @@ pipeline {
 
         stage("Deploy to Stage") {
             steps {
-                echo("deploy to Stage")
+                echo("Deploy to Stage")
             }
         }
 
@@ -85,12 +85,12 @@ pipeline {
             }
         }
 
-        stage('Publish sanity Extent Report') {
+        stage('Publish Sanity Extent Report') {
             steps {
                 publishHTML([allowMissing: false,
                              alwaysLinkToLastBuild: false,
                              keepAll: true,
-                             reportDir: 'reports',
+                             reportDir: 'target/reports', // Ensure this path is correct
                              reportFiles: 'TestExecutionReport.html',
                              reportName: 'HTML Sanity Extent Report',
                              reportTitles: ''])

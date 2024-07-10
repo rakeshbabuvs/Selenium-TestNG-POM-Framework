@@ -15,4 +15,12 @@
         </classes>
     </test>
 
+    <test name="ACC Page Test _ chrome">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.qa.opencart.tests.AccountPageTest" />
+        </classes>
+    </test>
+
+
 </suite>

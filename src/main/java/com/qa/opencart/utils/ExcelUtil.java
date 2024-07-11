@@ -38,7 +38,7 @@ public class ExcelUtil {
             e.printStackTrace();
         } catch (InvalidFormatException e) {
             e.printStackTrace();
-        } catch (IOException | org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

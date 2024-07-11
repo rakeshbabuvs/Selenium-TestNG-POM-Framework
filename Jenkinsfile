@@ -40,7 +40,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/test_regression.xml"
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/test_sanity.xml"
                 }
             }
         }
@@ -74,15 +74,6 @@ pipeline {
         stage("Deploy to Stage") {
             steps {
                 echo("Deploy to Stage")
-            }
-        }
-
-        stage('Run Sanity Automation Tests') {
-            steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/test_sanity.xml"
-                }
             }
         }
 

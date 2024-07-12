@@ -17,7 +17,7 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
                     sh '''
-                        MAVEN_OPTS="--add-opens jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED" mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/test_regression.xml
+                        MAVEN_OPTS="--add-opens jdk.compiler/com.sun.tools.javac=ALL-UNNAMED --add-opens jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED" mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunner/test_regression.xml
                     '''
                 }
             }

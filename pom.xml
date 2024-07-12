@@ -86,7 +86,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <extentreports-version>5.0.8</extentreports-version>
         <aspectj.version>1.9.19</aspectj.version>
-        <suiteXmlFiles>src/test/resources/testrunner/test_regression.xml</suiteXmlFiles>
+
     </properties>
 
     <build>

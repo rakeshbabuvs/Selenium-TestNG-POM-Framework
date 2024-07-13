@@ -2,7 +2,11 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven' // Ensure 'maven' is the correct name configured in Jenkins
+        maven 'maven'
+    }
+
+    environment {
+        SANITY_TESTS_RAN = false
     }
 
     stages {
@@ -29,7 +33,7 @@ pipeline {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
             }
             steps {
-                echo "Deploy to Dev"
+                echo "deploy to Dev"
             }
             post {
                 failure {
@@ -45,7 +49,7 @@ pipeline {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
             }
             steps {
-                echo "Deploy to QA"
+                echo "deploy to qa"
             }
             post {
                 failure {
@@ -62,8 +66,8 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
-                    sh 'mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_regression.xml'
+                    git 'https://github.com/naveenanimation20/Feb2024POMSeries.git'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_regression.xml"
                 }
             }
             post {
@@ -83,7 +87,7 @@ pipeline {
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'allure-report']] // Adjust the path if necessary
+                        results: [[path: '/allure-results']]
                     ])
                 }
             }
@@ -94,11 +98,66 @@ pipeline {
                 publishHTML([allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: 'reports', // Adjusted to the target directory where reports are generated
+                    reportDir: 'reports',
                     reportFiles: 'TestExecutionReport.html',
                     reportName: 'HTML Regression Extent Report',
                     reportTitles: ''])
             }
         }
+
+        stage("Deploy to Stage") {
+            when {
+                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
+            }
+            steps {
+                echo "deploy to Stage"
+            }
+            post {
+                failure {
+                    script {
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+            }
+        }
+
+        stage('Run Sanity Automation Tests') {
+            when {
+                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
+            }
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/naveenanimation20/Feb2024POMSeries.git'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_sanity.xml"
+                }
+                script {
+                    env.SANITY_TESTS_RAN = true
+                }
+            }
+            post {
+                failure {
+                    script {
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+            }
+        }
+
+        stage('Publish sanity Extent Report') {
+            when {
+                expression { env.SANITY_TESTS_RAN == 'true' }
+            }
+            steps {
+                publishHTML([allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'reports',
+                    reportFiles: 'TestExecutionReport.html',
+                    reportName: 'HTML Sanity Extent Report',
+                    reportTitles: ''])
+            }
+        }
     }
+
+
 }

@@ -67,7 +67,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_regression.xml"
+                    sh 'mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_regression.xml'
 
 
                 }
@@ -104,44 +104,6 @@ pipeline {
                     reportFiles: 'TestExecutionReport.html',
                     reportName: 'HTML Regression Extent Report',
                     reportTitles: ''])
-            }
-        }
-
-        stage("Deploy to Stage") {
-            when {
-                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
-            }
-            steps {
-                echo "deploy to Stage"
-            }
-            post {
-                failure {
-                    script {
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
-            }
-        }
-
-        stage('Run Sanity Automation Tests') {
-            when {
-                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
-            }
-            steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
-                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_regression.xml"
-                }
-                script {
-                    env.SANITY_TESTS_RAN = true
-                }
-            }
-            post {
-                failure {
-                    script {
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
             }
         }
 

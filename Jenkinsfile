@@ -2,11 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven'
-    }
-
-    environment {
-        SANITY_TESTS_RAN = false
+        maven 'maven' // Ensure 'maven' is the correct name configured in Jenkins
     }
 
     stages {
@@ -33,7 +29,7 @@ pipeline {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
             }
             steps {
-                echo "deploy to Dev"
+                echo "Deploy to Dev"
             }
             post {
                 failure {
@@ -49,7 +45,7 @@ pipeline {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
             }
             steps {
-                echo "deploy to qa"
+                echo "Deploy to QA"
             }
             post {
                 failure {
@@ -68,8 +64,6 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
                     sh 'mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_regression.xml'
-
-
                 }
             }
             post {
@@ -89,7 +83,7 @@ pipeline {
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
-                        results: [[path: '/allure-results']]
+                        results: [[path: 'target/allure-results']] // Adjust the path if necessary
                     ])
                 }
             }
@@ -106,22 +100,5 @@ pipeline {
                     reportTitles: ''])
             }
         }
-
-        stage('Publish sanity Extent Report') {
-            when {
-                expression { env.SANITY_TESTS_RAN == 'true' }
-            }
-            steps {
-                publishHTML([allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: 'reports',
-                    reportFiles: 'TestExecutionReport.html',
-                    reportName: 'HTML Sanity Extent Report',
-                    reportTitles: ''])
-            }
-        }
     }
-
-
 }

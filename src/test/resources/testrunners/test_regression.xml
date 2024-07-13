@@ -8,7 +8,7 @@
         <listener class-name="com.qa.opencart.Listeners.AnnotationTransforme" />
     </listeners>
 
-    <test name="Sanity Test - Open cart login test">
+    <test name="Regression Test - Open cart login test">
         <parameter name="browser" value="chrome" />
         <classes>
             <class name="com.qa.opencart.tests.LoginPageTest" />

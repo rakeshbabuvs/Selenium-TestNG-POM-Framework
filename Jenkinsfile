@@ -68,6 +68,8 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/rakeshbabuvs/Selenium-TestNG-POM-Framework.git'
                     sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/test_regression.xml"
+
+
                 }
             }
             post {

@@ -29,12 +29,13 @@
             <version>4.21.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.7.0</version>
-        </dependency>
+            <!-- Other dependencies -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>7.7.1</version> <!-- or any other appropriate version -->
 
+            </dependency>
 
         <dependency>
             <groupId>org.apache.poi</groupId>

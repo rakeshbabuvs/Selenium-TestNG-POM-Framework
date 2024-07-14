@@ -19,6 +19,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <extentreports-version>5.0.8</extentreports-version>
         <aspectj.version>1.9.19</aspectj.version>
+         <suiteXmlFile>src/test/resources/testrunners/test_regression.xml</suiteXmlFile>
     </properties>
 
     <dependencies>

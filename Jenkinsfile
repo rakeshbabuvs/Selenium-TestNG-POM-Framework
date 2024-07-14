@@ -87,7 +87,7 @@ pipeline {
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
-                        results: [[path: '/allure-report']]
+                        results: [[path: '/allure-results']]
                     ])
                 }
             }
@@ -98,7 +98,7 @@ pipeline {
                 publishHTML([allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: 'report',
+                    reportDir: 'reports',
                     reportFiles: 'TestExecutionReport.html',
                     reportName: 'HTML Regression Extent Report',
                     reportTitles: ''])

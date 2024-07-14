@@ -2,8 +2,10 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven'
+        maven 'maven' // Ensure 'maven' is correctly configured in Jenkins tools
     }
+
+    stages {
         stage('Run Regression Automation Tests') {
             when {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
@@ -31,7 +33,7 @@ pipeline {
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
-                        results: [[path: '/allure-results']]
+                        results: [[path: 'target/allure-results']]
                     ])
                 }
             }
@@ -42,14 +44,19 @@ pipeline {
                 publishHTML([allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: 'reports',
+                    reportDir: 'target/reports',
                     reportFiles: 'TestExecutionReport.html',
                     reportName: 'HTML Regression Extent Report',
                     reportTitles: ''])
             }
         }
-
     }
 
-
+    post {
+        success {
+            script {
+                currentBuild.result = 'SUCCESS'
+            }
+        }
+    }
 }

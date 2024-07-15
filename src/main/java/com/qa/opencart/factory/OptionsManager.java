@@ -23,10 +23,13 @@ public class OptionsManager {
         if (Boolean.parseBoolean(prop.getProperty("headless"))) {
             System.out.println("====Running tests in headless======");
             co.addArguments("--headless");
-
         }
         if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
             co.addArguments("--incognito");
+        }
+        if (Boolean.parseBoolean(prop.getProperty("remote"))){
+            co.setCapability("browserName","chrome");
+
         }
 
         return co;
@@ -42,6 +45,10 @@ public class OptionsManager {
         if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
             fo.addArguments("--incognito");
         }
+        if (Boolean.parseBoolean(prop.getProperty("remote"))){
+            co.setCapability("browserName","forefox");
+
+        }
 
         return fo;
     }
@@ -55,6 +62,10 @@ public class OptionsManager {
         }
         if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
             eo.addArguments("--inPrivate");
+        }
+        if (Boolean.parseBoolean(prop.getProperty("remote"))){
+            co.setCapability("browserName","edge");
+
         }
 
         return eo;

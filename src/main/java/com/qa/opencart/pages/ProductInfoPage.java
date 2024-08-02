@@ -1,5 +1,6 @@
 package com.qa.opencart.pages;
 
+import com.qa.opencart.logger.Log;
 import com.qa.opencart.utils.ElementUtil;
 import com.qa.opencart.utils.TimeUtil;
 import org.openqa.selenium.By;
@@ -29,7 +30,8 @@ public class ProductInfoPage {
 
     public String getProductHeader() {
         String header = eleUtil.doGetText(productHeader);
-        System.out.println("product header ===" + header);
+        //System.out.println("product header ===" + header);
+        Log.info("product header ===" + header);
         return header;
     }
 
@@ -37,7 +39,8 @@ public class ProductInfoPage {
     public int getProductImagesCount() {
         int imagesCount =
                 eleUtil.waitForVisibilityOfElemenetsLocated(productImagesCount, TimeUtil.DEFAULT_MEDIUM_TIME).size();
-        System.out.println("total images ==" + imagesCount);
+       // System.out.println("total images ==" + imagesCount);
+        Log.info("total images ==" + imagesCount);
         return imagesCount;
     }
 

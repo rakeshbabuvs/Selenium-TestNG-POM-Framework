@@ -1,6 +1,7 @@
 package com.qa.opencart.pages;
 
 import com.qa.opencart.constants.AppConstants;
+import com.qa.opencart.logger.Log;
 import com.qa.opencart.utils.ElementUtil;
 import com.qa.opencart.utils.TimeUtil;
 import org.openqa.selenium.By;
@@ -55,7 +56,8 @@ public class RegisterPage {
 
         String successMesg = eleUtil.waitForElementVisible(successMessg, TimeUtil.DEFAULT_MEDIUM_TIME).getText();
 
-        System.out.println(successMesg);
+        //System.out.println(successMesg);
+        Log.info(successMesg);
 
         if (successMesg.contains(AppConstants.USER_REGISTER_SUCCESS_MESSG)) {
             eleUtil.doClick(logoutLink);

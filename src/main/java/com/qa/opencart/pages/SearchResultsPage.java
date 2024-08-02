@@ -1,5 +1,6 @@
 package com.qa.opencart.pages;
 
+import com.qa.opencart.logger.Log;
 import com.qa.opencart.utils.ElementUtil;
 import com.qa.opencart.utils.TimeUtil;
 import org.openqa.selenium.By;
@@ -26,7 +27,8 @@ public class SearchResultsPage {
                 eleUtil.waitForVisibilityOfElemenetsLocated(searchResult, TimeUtil.DEFAULT_MEDIUM_TIME);
 
         int resultCount = resultsList.size();//0
-        System.out.println("product search results count ====" + resultCount);
+        //System.out.println("product search results count ====" + resultCount);
+        Log.info("product search results count ====" + resultCount);
         return resultCount;
     }
 

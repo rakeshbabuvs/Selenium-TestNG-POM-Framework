@@ -1,6 +1,7 @@
 package com.qa.opencart.pages;
 
 import com.qa.opencart.constants.AppConstants;
+import com.qa.opencart.logger.Log;
 import com.qa.opencart.utils.ElementUtil;
 import com.qa.opencart.utils.TimeUtil;
 import org.openqa.selenium.By;
@@ -29,14 +30,16 @@ public class LoginPage {
    // @Step("getting login page title...")
     public String getLoginPageTitle() {
         String title = eleUtil.waitForTitleToBe(AppConstants.LOGIN_PAGE_TITLE, TimeUtil.DEFAULT_TIME);
-        System.out.println("login page title : " + title);
+        //System.out.println("login page title : " + title);
+        Log.info("login page title : " + title);
         return title;
     }
 
     //@Step("getting login page URL...")
     public String getLoginPageURL() {
         String url = eleUtil.waitForURLContains(AppConstants.LOGIN_PAGE_FRACTION_URL, TimeUtil.DEFAULT_TIME);
-        System.out.println("login page url : " + url);
+        //System.out.println("login page url : " + url);
+        Log.info("login page url : " + url);
         return url;
     }
 
@@ -49,7 +52,8 @@ public class LoginPage {
    // @Step("login to application with username: {0} and password: {1}")
     public AccountsPage doLogin(String username, String pwd) {
 
-        System.out.println("user creds is : " + username + ":" + pwd);
+        //System.out.println("user creds is : " + username + ":" + pwd);
+        Log.info("user creds is : " + username + ":" + pwd);
         eleUtil.doSendKeys(emailId, username, TimeUtil.DEFAULT_MEDIUM_TIME);
         eleUtil.doSendKeys(password, pwd);
         eleUtil.doClick(loginBtn);

@@ -1,6 +1,7 @@
 package com.qa.opencart.pages;
 
 import com.qa.opencart.constants.AppConstants;
+import com.qa.opencart.logger.Log;
 import com.qa.opencart.utils.ElementUtil;
 import com.qa.opencart.utils.TimeUtil;
 import org.openqa.selenium.By;
@@ -27,13 +28,15 @@ public class AccountsPage {
 
     public String getAccPageTitle() {
         String title = eleUtil.waitForTitleToBe(AppConstants.ACCOUNTS_PAGE_TITLE, TimeUtil.DEFAULT_TIME);
-        System.out.println("Acc page title : " + title);
+        //System.out.println("Acc page title : " + title);
+        Log.info("Acc page title : " + title);
         return title;
     }
 
     public String getAccPageURL() {
         String url = eleUtil.waitForURLContains(AppConstants.ACC_PAGE_FRACTION_URL, TimeUtil.DEFAULT_TIME);
-        System.out.println("Acc page url : " + url);
+       // System.out.println("Acc page url : " + url);
+        Log.info("Acc page url : " + url);
         return url;
     }
 
@@ -58,14 +61,16 @@ public class AccountsPage {
 
 
     public SearchResultsPage doSearch(String searchKey) {
-        System.out.println("searhing for product: " + searchKey);
+       // System.out.println("searhing for product: " + searchKey);
+        Log.info("searhing for product: " + searchKey);
 
         if (isSearchExist()) {
             eleUtil.doSendKeys(search, searchKey);
             eleUtil.doClick(searchIcon);
             return new SearchResultsPage(driver);
         } else {
-            System.out.println("search field is not present on the page");
+            //System.out.println("search field is not present on the page");
+            Log.error("search field is not present on the page");
             return null;
         }
     }

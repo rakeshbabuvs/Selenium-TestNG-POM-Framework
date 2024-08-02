@@ -26,5 +26,11 @@
             <class name="com.qa.opencart.tests.ProductInfoPageTest" />
         </classes>
     </test>
+    <test name="Regression Test - Open cart Registration test">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.qa.opencart.tests.RegistrationPageTest" />
+        </classes>
+    </test>
 
 </suite>

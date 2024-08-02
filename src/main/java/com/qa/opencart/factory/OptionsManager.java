@@ -1,5 +1,6 @@
 package com.qa.opencart.factory;
 
+import com.qa.opencart.logger.Log;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -21,7 +22,8 @@ public class OptionsManager {
         co = new ChromeOptions();
 
         if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-            System.out.println("====Running tests in headless======");
+           // System.out.println("====Running tests in headless======");
+            Log.info("====Running tests in headless======");
             co.addArguments("--headless");
         }
         if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
@@ -39,7 +41,8 @@ public class OptionsManager {
         fo = new FirefoxOptions();
 
         if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-            System.out.println("====Running tests in headless======");
+           // System.out.println("====Running tests in headless======");
+            Log.info("====Running tests in headless======");
             fo.addArguments("--headless");
         }
         if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
@@ -57,7 +60,8 @@ public class OptionsManager {
         eo = new EdgeOptions();
 
         if (Boolean.parseBoolean(prop.getProperty("headless"))) {
-            System.out.println("====Running tests in headless======");
+           // System.out.println("====Running tests in headless======");
+            Log.info("====Running tests in headless======");
             eo.addArguments("--headless");
         }
         if (Boolean.parseBoolean(prop.getProperty("incognito"))) {
